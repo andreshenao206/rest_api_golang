@@ -14,7 +14,7 @@ func User(r *gin.Engine) {
 	route.POST("/login", auth.JwtMiddleware().LoginHandler)
 	route.Use(auth.JwtMiddleware().MiddlewareFunc())
 	{
-		//route.GET("/:id", controllers.GetUser)
+		route.POST("/json", controllers.CreateTest)
 
 	}
 }

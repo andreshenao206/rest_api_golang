@@ -2,11 +2,16 @@ package helpers
 
 import (
 	"errors"
+	"fmt"
+	"log"
 	"rest_golang/db"
 
 	//"fmt"
 
 	"rest_golang/app/models"
+
+	jwt "github.com/appleboy/gin-jwt/v2"
+	"github.com/gin-gonic/gin"
 )
 
 func LoginUser(identifier string) (*models.User, error) {
@@ -42,4 +47,15 @@ func ListUser(email string) ([]models.User, error) {
 		err = db.DB.Find(&user).Error
 	}
 	return user, err
+}
+func EmailbyToken(c *gin.Context) string {
+	claims := jwt.ExtractClaims(c)
+	log.Println(claims)
+	emailLogin, okE := claims["id"]
+	log.Println(emailLogin)
+	if !okE {
+		return ""
+	}
+	return fmt.Sprintf("%v", emailLogin)
+
 }

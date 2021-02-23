@@ -7,3 +7,7 @@ type ErrorRespose struct {
 	Status bool
 	Msg    string
 }
+
+type Userjson struct {
+	Json_user []int `json:"json_user"`
+}
